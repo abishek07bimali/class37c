@@ -23,3 +23,11 @@ const connectDB = async () => {
 };
 
 module.exports = { sequelize, connectDB };
+
+
+    // 3. Generate JWT
+    // const token = jwt.sign(
+    //   { id: user.id },
+    //   process.env.JWT_SECRET,
+    //   { expiresIn: "1d" }
+    // );
