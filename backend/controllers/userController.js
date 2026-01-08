@@ -43,7 +43,7 @@ const addUser = async (req, res) => {
 const getAllUsers = async (req, res) => {
   try {
     const user = await User.findAll({ attributes: { exclude: ["password"] } })
-    return res.json({ user, message: "User fetched successfully" })
+    return res.json({ success:true,user, message: "User fetched successfully" })
   } catch (error) {
     return res.status(500).json({
       message: "Error fetching users",
@@ -120,11 +120,13 @@ const deleteUser = async (req, res) => {
     const user = await User.findByPk(id);
     if (!user) {
       return res.status(404).json({
+        success:false,
         message: "User not found",
       });
     }
     await user.destroy();
     return res.status(200).json({
+      success:true,
       message: "User deleted successfully",
     });
 

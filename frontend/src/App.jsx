@@ -5,6 +5,7 @@ import { Toaster } from 'react-hot-toast';
 import Headers from './pages/components/Headers';
 import Footers from './pages/components/Footers';
 import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   // block for js 
@@ -18,7 +19,7 @@ function App() {
          <Route path="/register" element={<Register/>} />
          <Route path="/contact" element={<div> conatct</div>} />
          <Route path="/userdash" element={<div> userdash</div>} />
-         <Route path="/admindash" element={<div> admindash</div>} />
+         <Route path="/admindash" element={<Dashboard/>} />
       </Routes>
       <Footers/>
     </Router>
