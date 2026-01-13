@@ -6,22 +6,31 @@ import Headers from './pages/components/Headers';
 import Footers from './pages/components/Footers';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-
+import Edituser from './pages/Edituser';
+import ProtectedRoute from './protected/ProtectedRoute'
 function App() {
   // block for js 
   return (
     <Router>
-      <Toaster/>
-      <Headers/>
+      <Toaster />
+      <Headers />
       <Routes>
-         <Route path="/" element={<Home/>} />
-         <Route path="/login" element={<Login/>} />
-         <Route path="/register" element={<Register/>} />
-         <Route path="/contact" element={<div> conatct</div>} />
-         <Route path="/userdash" element={<div> userdash</div>} />
-         <Route path="/admindash" element={<Dashboard/>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/contact" element={<div> conatct</div>} />
+        <Route path="/userdash" element={<div> userdash</div>} />
+
+        <Route path="/admindash" element={
+          <ProtectedRoute allowedRoles={['admin']} element={<Dashboard />}
+          />} />
+
+        <Route path="/edituser/:id" element={
+          <ProtectedRoute allowedRoles={['admin']} element={<Edituser />}
+          />
+        } />
       </Routes>
-      <Footers/>
+      <Footers />
     </Router>
   )
 }

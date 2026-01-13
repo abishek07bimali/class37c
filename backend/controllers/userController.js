@@ -57,10 +57,11 @@ const getUsersById = async (req, res) => {
     const id = req.params.uid
     const user = await User.findByPk(id)
     if (!user) {
-      return res.json({ message: "User not found" })
+      return res.json({success:false, message: "User not found" })
     }
     return res.json({
-      user: { id: user.id, name: user.username },
+      success:true,
+      user: { email: user.email, username: user.username },
       message: "User fetched successfully"
     })
   } catch (error) {
@@ -85,6 +86,7 @@ const updateUser = async (req, res) => {
       const isexistinguser = await User.findOne({ where: { username } })
       if (isexistinguser && isexistinguser.id !== user.id) {
         return res.status(400).json({
+          success:false,
           message: "user with that username exist!",
         })
       }
@@ -99,6 +101,7 @@ const updateUser = async (req, res) => {
         password: hashedPassword,
       });
       return res.status(200).json({
+        success:true,
         message: "User updated successfully",
         user: {
           id: user.id
@@ -162,6 +165,20 @@ const loginUser = async (req, res) => {
   }
 };
 
+
+const getMe = async (req, res) => {
+  const id=req.user.id
+  try {
+    const user = await User.findByPk(id)
+    return res.json({ success:true,user, message: "User fetched successfully" })
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error fetching users",
+      error: error.message,
+    });
+  }
+}
+
 module.exports = {
-  addUser, getAllUsers, updateUser, deleteUser, getUsersById, loginUser
+  addUser, getAllUsers, updateUser, deleteUser, getUsersById, loginUser,getMe
 }

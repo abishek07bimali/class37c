@@ -1,10 +1,10 @@
 import { jwtDecode } from "jwt-decode";
 
-export const getToken = () => localStorage.getItem("token");
-export const getUserDetails = () => {
-  const user = localStorage.getItem("user");
-  return user ? JSON.parse(user) : null; 
-};
+export const getToken = () => localStorage.getItem("token-37c");
+// export const getUserDetails = () => {
+//   const user = localStorage.getItem("user");
+//   return user ? JSON.parse(user) : null; 
+// };
 export const isTokenExpired = (token) => {
     try {
         const decoded = jwtDecode(token);

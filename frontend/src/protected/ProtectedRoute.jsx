@@ -5,7 +5,7 @@ const ProtectedRoute = ({ element, allowedRoles }) => {
   const role = getUserRole();
 
   if (!role || !allowedRoles.includes(role)) {
-    localStorage.removeItem("token");
+    localStorage.removeItem("token-37c");
     return <Navigate to="/login" replace />;
   }
 
