@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { getUser,deleteUserById, getMe } from '../services/api';
+import { getUser,deleteUserById } from '../services/api';
 import toast from 'react-hot-toast';
-import { useNavigate }  from 'react-router';
+import { useNavigate }  from 'react-router-dom';
 
 const Dashboard = () => {
   const [data, setData] = useState([]);
@@ -23,11 +23,8 @@ const Dashboard = () => {
         setLoading(false);
       }
     };
-    const getmydata=async()=>{
-      await getMe()
-    }
+
     getallusers();
-    getmydata()
     
   }, [])
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link }  from 'react-router-dom';
 
 const Headers = () => {
   return (
@@ -8,7 +9,10 @@ const Headers = () => {
       textAlign: 'center',
       fontWeight: 'bold'
     }}>
-      Header
+      <button className='p-2 bg-red-400 m-2 rounded-lg text-white capitalize '>home</button>
+      <button className='p-2 bg-red-400 m-2 rounded-lg text-white capitalize'>about</button>
+      <Link to={"/login"} className='p-2 bg-red-400 m-2 rounded-lg text-white capitalize hover:bg-red-600'>login</Link>
+      <Link to={"/register"} className='p-2 bg-red-400 m-2 rounded-lg text-white capitalize hover:bg-red-600'>register</Link>
     </div>
   );
 };
