@@ -1,39 +1,39 @@
-const multer = require('multer');
+const multer = require("multer");
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        return cb(null, "./uploads");
-    },
-    filename: (req, file, cb) => {
-        const fileName = file?.originalname?.replace(/\s/g, "_");
-        cb(null, fileName);
-    },
+  destination: (req, file, cb) => {
+    cb(null, "./uploads");
+  },
+  filename: (req, file, cb) => {
+    const fileName = file.originalname.replace(/\s/g, "_");
+    cb(null, Date.now() + "_" + fileName);
+  },
 });
 
-var fileFilter = (req, file, callback) => {
-    if (!file.originalname.match(/\.(pdf|jpg|JPEG|png|jpeg)$/)) {
-        return callback(new Error('Invalid file format'), false)
-    }
-    callback(null, true)
-}
-
-const fileUpload = (fieldName) => (req, res, next) => {
-    multer({
-        storage,
-        fileFilter: fileFilter,
-    }).array(fieldName, 100)(req, res, (err) => {
-        if (err) {
-            return res.status(400).json({ error: err.message });
-        }
-    if (req.files) {
-        console.log("Uploaded Files:");
-        req.files.forEach(file => {
-            console.log(`- ${file.originalname} -> ${file.filename}`);
-        });
-    }
-
-        next();
-    });
+const fileFilter = (req, file, callback) => {
+  if (!file.originalname.match(/\.(jpg|jpeg|png|webp)$/i)) {
+    return callback(new Error("Only image files are allowed"), false);
+  }
+  callback(null, true);
 };
 
-module.exports = fileUpload
+// single + multiple handler
+const uploadProductImages = (req, res, next) => {
+  const upload = multer({
+    storage,
+    fileFilter,
+    limits: { fileSize: 5 * 1024 * 1024 },
+  }).fields([
+    { name: "thumbnail", maxCount: 1 },   // single image
+    { name: "images", maxCount: 10 },      // multiple images
+  ]);
+
+  upload(req, res, (err) => {
+    if (err) {
+      return res.status(400).json({ error: err.message });
+    }
+    next();
+  });
+};
+
+module.exports = uploadProductImages;

@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { getUser,deleteUserById } from '../services/api';
+import { getUser, deleteUserById } from '../services/api';
 import toast from 'react-hot-toast';
-import { useNavigate }  from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate=useNavigate()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const getallusers = async () => {
@@ -25,7 +25,7 @@ const Dashboard = () => {
     };
 
     getallusers();
-    
+
   }, [])
 
 
@@ -50,7 +50,7 @@ const Dashboard = () => {
     }
   };
 
-  const handleEdit=(id)=>{
+  const handleEdit = (id) => {
     navigate(`/edituser/${id}`)
   }
 
@@ -58,6 +58,12 @@ const Dashboard = () => {
 
   return (
     <div>
+      <Link
+        to="/add-product"
+        className="p-2 bg-blue-400 m-2 rounded-lg text-white"
+      >
+        add product
+      </Link>
       <table className="min-w-full border-collapse border border-gray-300 mt-10">
         <thead className="bg-green-600 text-white">
           <tr>
@@ -78,7 +84,7 @@ const Dashboard = () => {
               <td className="py-2 px-4 border border-gray-300">{user.username}</td>
               <td className="py-2 px-4 border border-gray-300">
                 <button
-                onClick={()=>handleEdit(user.id)}
+                  onClick={() => handleEdit(user.id)}
                   className="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded mr-2 transition"
                 >
                   Edit

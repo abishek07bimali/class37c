@@ -5,7 +5,8 @@ import { Toaster } from 'react-hot-toast';
 import Headers from './pages/components/Headers';
 import Footers from './pages/components/Footers';
 import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
+import Dashboard from './pages/Dashboard'; 
+import AdminAddProduct from './pages/AdminAddProduct'; 
 import Edituser from './pages/Edituser';
 import ProtectedRoute from './protected/ProtectedRoute'
 function App() {
@@ -29,6 +30,16 @@ function App() {
           <ProtectedRoute allowedRoles={['admin']} element={<Edituser />}
           />
         } />
+        <Route
+          path="/add-product"
+          element={
+            <ProtectedRoute
+              allowedRoles={['admin']}
+              element={<AdminAddProduct />}
+            />
+          }
+        />
+
       </Routes>
       <Footers />
     </Router>

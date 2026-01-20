@@ -30,3 +30,8 @@ export const deleteUserById = (data) => Api.delete(`/api/user/deleteuser/${data}
 export const getUserById = (id) => Api.get(`/api/user/getUserByid/${id}`,config)
 export const updateUserById = (id,data) => Api.put(`/api/user/updateUserByid/${id}`,data,config)
 export const getMe = () => Api.get('/api/user/getMe',config)
+
+
+export const createProductApi = (data) =>ApiFormData.post("/api/product/addProduct", data, config);
+export const getAllProductsApi = () =>Api.get("/api/product/getProduct");
+export const updateProductApi = (id) =>Api.delete(`/api/product/updateProduct/${id}`, config);

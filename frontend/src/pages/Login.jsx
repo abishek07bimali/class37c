@@ -23,7 +23,7 @@ function Login() {
                 return toast.error(response?.data?.message);
             }
             localStorage.setItem("token-37c", response?.data?.token)
-                // localStorage.setItem("user", JSON.stringify(response?.data?.user))
+            // localStorage.setItem("user", JSON.stringify(response?.data?.user))
             toast.success(response?.data?.message)
             let decoded;
             try {
@@ -33,10 +33,11 @@ function Login() {
             }
 
             if (decoded.role === "admin") {
-                navigate("/admindash");
+                navigate("/admindash",{replace:true});
             } else {
-                navigate("/userdash");
+                navigate("/userdash",{ replace: true });
             }
+            window.location.reload();            
 
         }
         catch (err) {

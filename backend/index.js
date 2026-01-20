@@ -1,13 +1,16 @@
 const express = require("express");
 const app = express();
 const { sequelize, connectDB } = require("./database/db");
-const cors=require("cors")
+const cors = require("cors")
 app.use(cors({
   origin: "http://localhost:5173",
-  credentials: true  
+  credentials: true
 }));
 app.use(express.json())
-app.use("/api/user/",require('./routes/route'))
+app.use("/uploads", express.static("uploads"));
+
+app.use("/api/user/", require('./routes/route'))
+app.use("/api/product/", require('./routes/productRoute'))
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to the Home Page" });

@@ -1,6 +1,4 @@
 const express = require("express").Router();
-const multer = require("multer");
-const upload = multer();
 
 const {getAllUsers,addUser, getUsersById, updateUser, loginUser,deleteUser, getMe}=require('../controllers/userController');
 const authGuard = require("../helpers/authguagrd");
