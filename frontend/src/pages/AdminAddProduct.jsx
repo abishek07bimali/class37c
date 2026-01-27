@@ -13,7 +13,7 @@ const AdminAddProduct = () => {
     const [images, setImages] = useState([]);
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
-    const API_BASE = import.meta.env.VITE_API_BASE_URL;
+    // const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
     const fetchProducts = async () => {
         try {
@@ -165,7 +165,7 @@ const AdminAddProduct = () => {
                                     <td className="py-2 px-4 border border-gray-300">
                                         {product.thumbnail ? (
                                             <img
-                                                src={`${API_BASE}${product.thumbnail}`}
+                                                src={`${import.meta.env.VITE_API_BASE_URL}${product.thumbnail}`}
                                                 alt={product.name}
                                                 className="w-12 h-12 object-cover rounded"
                                             />
@@ -176,7 +176,7 @@ const AdminAddProduct = () => {
                                             {product.images.map((img, index) => (
                                                 <img
                                                     key={index}
-                                                     src={`${API_BASE}${product.images[index]}`}
+                                                     src={`${import.meta.env.VITE_API_BASE_URL}${product.images[index]}`}
                                                     alt={`${product.name} ${index + 1}`}
                                                     style={{ width: "100px", height: "100px", objectFit: "cover" }}
                                                 />

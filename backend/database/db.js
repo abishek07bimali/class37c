@@ -1,8 +1,11 @@
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
+const isTestEnvironment = process.env.NODE_ENV === 'test';
+console.log(`Running in ${isTestEnvironment ? 'TEST' : 'DEVELOPMENT'} mode.`);
+
 const sequelize = new Sequelize(
-  process.env.DB_NAME,
+  isTestEnvironment ? process.env.TEST_DB_NAME : process.env.DB_NAME,
   process.env.DB_USER,
   process.env.DB_PASS,
   {
@@ -23,11 +26,3 @@ const connectDB = async () => {
 };
 
 module.exports = { sequelize, connectDB };
-
-
-    // 3. Generate JWT
-    // const token = jwt.sign(
-    //   { id: user.id },
-    //   process.env.JWT_SECRET,
-    //   { expiresIn: "1d" }
-    // );

@@ -34,4 +34,4 @@ export const getMe = () => Api.get('/api/user/getMe',config)
 
 export const createProductApi = (data) =>ApiFormData.post("/api/product/addProduct", data, config);
 export const getAllProductsApi = () =>Api.get("/api/product/getProduct");
-export const updateProductApi = (id) =>Api.delete(`/api/product/updateProduct/${id}`, config);
+export const updateProductApi = (id) =>ApiFormData.put(`/api/product/updateProduct/${id}`, config);
