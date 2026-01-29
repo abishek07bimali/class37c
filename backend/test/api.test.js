@@ -89,7 +89,7 @@ describe('test apis which need authorization', () => {
 
   beforeAll(async () => {
     const loginRes = await request(BASE_URL)
-      .post('/api/pract/login')
+      .post('/api/user/login')
       .send({
         email: userCredentials.email,
         password: userCredentials.password
@@ -100,7 +100,7 @@ describe('test apis which need authorization', () => {
 
   it('should get a list of all users when authenticated', async () => {
     const res = await request(BASE_URL)
-      .get('/api/pract/getallusers')
+      .get('/api/user/getallusers')
       .set('Authorization', `Bearer ${authToken}`);
 
     expect(res.body.success).toBe(false);
@@ -115,7 +115,7 @@ describe('test apis which need authorization', () => {
 
   it('should return 401 Unauthorized if no token is provided', async () => {
     const res = await request(BASE_URL)
-      .get('/api/pract/getallusers');
+      .get('/api/user/getallusers');
 
     expect(res.statusCode).toBe(401);
     expect(res.body.success).toBe(false);
@@ -124,7 +124,7 @@ describe('test apis which need authorization', () => {
 
   it('should return 401 Unauthorized if the token is invalid', async () => {
     const res = await request(BASE_URL)
-      .get('/api/pract/getallusers')
+      .get('/api/user/getallusers')
       .set('Authorization', 'Bearer an-invalid-token-string');
 
     expect(res.statusCode).toBe(401);
@@ -135,7 +135,7 @@ describe('test apis which need authorization', () => {
   // get user by id
   it('should return the user by id', async () => {
     const res = await request(BASE_URL)
-      .get('/api/pract/getusersbyid/1')
+      .get('/api/user/getusersbyid/1')
       .set('Authorization', `Bearer ${authToken}`);
       console.log(res.body)
 
